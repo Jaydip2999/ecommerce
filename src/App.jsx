@@ -1,10 +1,15 @@
-import Home from "./pages/Home/Home";
+import Navbar from "./components/layout/Navbar";
+import "./App.css";
 
 function App() {
   return (
     <>
-        <Navbar />
-      {/* Routes */}
+      <Navbar />
+
+      <div style={{ padding: "50px", textAlign: "center" }}>
+        <h1>Welcome to ShopEase</h1>
+        <p>React Ecommerce Website</p>
+      </div>
     </>
   );
 }
