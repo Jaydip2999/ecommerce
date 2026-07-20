@@ -1,50 +1,128 @@
 import "./Footer.css";
 
-function Footer() {
-  return (
-    <footer className="footer">
+import {
 
-      <div className="footer-container">
+FiFacebook,
+FiInstagram,
+FiTwitter,
+FiGithub,
+FiArrowUp
 
-        <div className="footer-box">
-          <h2>ShopEase</h2>
-          <p>
-            Your one-stop destination for quality products at the best prices.
-          </p>
-        </div>
+} from "react-icons/fi";
 
-        <div className="footer-box">
-          <h3>Quick Links</h3>
+function Footer(){
 
-          <ul>
-            <li>Home</li>
-            <li>Products</li>
-            <li>Categories</li>
-            <li>Cart</li>
-          </ul>
+const top=()=>{
 
-        </div>
+window.scrollTo({
 
-        <div className="footer-box">
+top:0,
 
-          <h3>Customer Support</h3>
+behavior:"smooth"
 
-          <p>Email: support@shopease.com</p>
+})
 
-          <p>Phone: +91 9876543210</p>
+}
 
-        </div>
+return(
 
-      </div>
+<footer className="footer">
 
-      <hr />
+<div className="footer-container">
 
-      <p className="copyright">
-        © 2026 ShopEase. All Rights Reserved.
-      </p>
+<div className="footer-col">
 
-    </footer>
-  );
+<h2>ShopEase</h2>
+
+<p>
+
+Modern Ecommerce Store built using React.
+
+</p>
+
+<div className="social">
+
+<FiFacebook/>
+
+<FiInstagram/>
+
+<FiTwitter/>
+
+<FiGithub/>
+
+</div>
+
+</div>
+
+<div className="footer-col">
+
+<h3>Company</h3>
+
+<a href="#">About</a>
+
+<a href="#">Careers</a>
+
+<a href="#">Blog</a>
+
+<a href="#">Contact</a>
+
+</div>
+
+<div className="footer-col">
+
+<h3>Support</h3>
+
+<a href="#">Help Center</a>
+
+<a href="#">Shipping</a>
+
+<a href="#">Returns</a>
+
+<a href="#">Privacy</a>
+
+</div>
+
+<div className="footer-col">
+
+<h3>Newsletter</h3>
+
+<input
+type="email"
+placeholder="Enter Email"
+/>
+
+<button>
+
+Subscribe
+
+</button>
+
+</div>
+
+</div>
+
+<div className="copyright">
+
+<p>
+
+© 2026 ShopEase. All Rights Reserved.
+
+</p>
+
+<button
+onClick={top}
+className="top-btn">
+
+<FiArrowUp/>
+
+</button>
+
+</div>
+
+</footer>
+
+)
+
 }
 
 export default Footer;
