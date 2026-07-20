@@ -1,5 +1,6 @@
 import Navbar from "./components/layout/Navbar";
 import "./App.css";
+import Footer from "./components/layout/Footer";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <h1>Welcome to ShopEase</h1>
         <p>React Ecommerce Website</p>
       </div>
+      <Footer />
     </>
   );
 }
