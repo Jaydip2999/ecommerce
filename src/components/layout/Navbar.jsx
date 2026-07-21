@@ -27,30 +27,23 @@ function Navbar() {
   return (
     <header className={scroll ? "navbar active" : "navbar"}>
       <div className="logo">
-
-        <div className="logo-icon">
-          S
-        </div>
+        <div className="logo-icon">S</div>
 
         <div>
           <h2>ShopEase</h2>
           <span>Premium Store</span>
         </div>
-
       </div>
 
       <nav className={menuOpen ? "nav-menu open" : "nav-menu"}>
-
         <a href="#">Home</a>
         <a href="#">Shop</a>
         <a href="#">Categories</a>
         <a href="#">Deals</a>
         <a href="#">About</a>
-
       </nav>
 
       <div className="right-icons">
-
         <button>
           <FiSearch />
         </button>
@@ -60,27 +53,19 @@ function Navbar() {
         </button>
 
         <button className="cart-btn">
-
           <FiShoppingCart />
 
           <span>2</span>
-
         </button>
 
         <button>
           <FiUser />
         </button>
 
-        <button className="login-btn">
-          Login
-        </button>
-
+        <button className="login-btn">Login</button>
       </div>
 
-      <div
-        className="mobile-btn"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
+      <div className="mobile-btn" onClick={() => setMenuOpen(!menuOpen)}>
         {menuOpen ? <FiX /> : <FiMenu />}
       </div>
     </header>
