@@ -14,82 +14,75 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    padding: 18px 70px;
-    backdrop-filter: blur(15px);
-    background: rgba(255, 255, 255, .75);
-    border-bottom: 1px solid rgba(255, 255, 255, .4);
-    transition: .35s;
+    gap: 28px;
+    padding: 16px 64px;
+    backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, .88);
+    border-bottom: 1px solid rgba(226, 232, 240, .9);
+    transition: .25s;
     z-index: 999;
 }
 
 .navbar.active {
-    padding: 14px 70px;
-    background: white;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+    padding: 12px 64px;
+    background: #fff;
+    box-shadow: 0 12px 34px rgba(15, 23, 42, .08);
 }
 
-.logo {
+.logo,
+.admin-brand {
     display: flex;
     align-items: center;
     gap: 12px;
-    cursor: pointer;
     text-decoration: none;
 }
 
 .logo-icon {
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(135deg, #2563eb, #4f46e5);
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #2563eb, #0f766e);
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 14px;
+    border-radius: 8px;
     font-size: 22px;
     font-weight: bold;
-    transition: .3s;
+    transition: .25s;
 }
 
 .logo:hover .logo-icon {
-    transform: rotate(-8deg) scale(1.08);
+    transform: translateY(-2px);
 }
 
-.logo h2 {
-    font-size: 24px;
+.logo h2,
+.admin-brand h2 {
+    font-size: 23px;
     color: #111827;
 }
 
-.logo span {
+.logo span,
+.admin-brand span {
     font-size: 12px;
-    color: #6b7280;
+    color: #64748b;
 }
 
 .nav-menu {
     display: flex;
-    gap: 35px;
+    justify-content: center;
+    gap: 28px;
 }
 
-.mobile-only-link {
-    display: none;
-}
-
-    .nav-menu a {
-        width: fit-content;
-    }
-
-    .mobile-only-link {
-        display: inline-block;
-    }
-
-    .nav-menu a {
-        text-decoration: none;
-        color: #374151;
-        font-weight: 600;
+.nav-menu a {
+    color: #374151;
+    font-weight: 700;
     position: relative;
-    transition: .3s;
+    transition: .25s;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
 .nav-menu a::after {
@@ -100,13 +93,10 @@ body {
     width: 0;
     height: 2px;
     background: #2563eb;
-    transition: .3s;
+    transition: .25s;
 }
 
-.nav-menu a:hover {
-    color: #2563eb;
-}
-
+.nav-menu a:hover,
 .nav-menu a.active {
     color: #2563eb;
 }
@@ -116,34 +106,55 @@ body {
     width: 100%;
 }
 
+.mobile-only-link {
+    display: none;
+}
+
 .right-icons {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
-.right-icons button,
-.icon-link {
-    width: 42px;
+.icon-link,
+.account-trigger {
     height: 42px;
     border: none;
     background: #eef2ff;
-    border-radius: 50%;
-    font-size: 20px;
+    border-radius: 999px;
+    font-size: 19px;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
-    transition: .3s;
+    transition: .25s;
     color: #111827;
     text-decoration: none;
 }
 
-.right-icons button:hover,
-.icon-link:hover {
+.icon-link {
+    width: 42px;
+}
+
+.account-trigger {
+    gap: 8px;
+    padding: 0 14px;
+    font-size: 16px;
+    font-weight: 800;
+    max-width: 156px;
+}
+
+.account-trigger span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.icon-link:hover,
+.account-trigger:hover {
     background: #2563eb;
     color: white;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 }
 
 .cart-btn,
@@ -156,34 +167,61 @@ body {
     position: absolute;
     top: -4px;
     right: -3px;
-    width: 20px;
+    min-width: 20px;
     height: 20px;
+    padding: 0 5px;
     background: #ef4444;
     color: white;
     font-size: 11px;
-    border-radius: 50%;
+    border-radius: 999px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: 800;
 }
 
-.login-btn {
-    width: 110px !important;
-    height: 42px;
-    border-radius: 30px !important;
-    background: #2563eb !important;
-    color: white;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+.account-menu {
+    position: relative;
+}
+
+.account-dropdown {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 12px);
+    width: 190px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 18px 38px rgba(15, 23, 42, .13);
+    padding: 8px;
+    display: none;
+}
+
+.account-menu:hover .account-dropdown,
+.account-menu:focus-within .account-dropdown {
+    display: grid;
+}
+
+.account-dropdown a,
+.account-dropdown button {
+    min-height: 40px;
+    padding: 0 10px;
+    border-radius: 6px;
     border: 0;
+    background: transparent;
+    color: #334155;
+    text-decoration: none;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     cursor: pointer;
 }
 
-.login-btn:hover {
-    background: #1d4ed8 !important;
+.account-dropdown a:hover,
+.account-dropdown button:hover {
+    background: #f1f5f9;
+    color: #2563eb;
 }
 
 .mobile-btn {
@@ -194,29 +232,38 @@ body {
     background: transparent;
 }
 
-/* ---------- Mobile ---------- */
-@media (max-width:992px) {
+@media (max-width: 1100px) {
     .navbar {
-        padding: 16px 30px;
+        padding: 15px 30px;
+        grid-template-columns: auto auto;
     }
 
     .nav-menu {
         position: fixed;
-        top: 78px;
+        top: 74px;
         left: -100%;
-        width: 280px;
-        height: calc(100vh - 78px);
+        width: min(320px, 86vw);
+        height: calc(100vh - 74px);
         background: white;
         display: flex;
         flex-direction: column;
-        padding: 40px 30px;
-        gap: 25px;
+        justify-content: flex-start;
+        padding: 34px 28px;
+        gap: 23px;
         box-shadow: 0 15px 40px rgba(0, 0, 0, .12);
-        transition: .35s;
+        transition: .3s;
     }
 
     .nav-menu.open {
         left: 0;
+    }
+
+    .nav-menu a {
+        width: fit-content;
+    }
+
+    .mobile-only-link {
+        display: inline-block;
     }
 
     .right-icons {
@@ -225,8 +272,8 @@ body {
 
     .mobile-btn {
         display: block;
-        font-size: 30px;
-        color: #111;
+        justify-self: end;
+        color: #111827;
     }
 }
 
@@ -240,6 +287,6 @@ body {
     }
 
     .navbar {
-        padding: 15px 20px;
+        padding: 14px 18px;
     }
 }

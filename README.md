@@ -1,31 +1,37 @@
-# e-commerce
-# ShopVerse
+# ShopEase Ecommerce Storefront
 
-A modern E-Commerce website built with React, JavaScript, Vite and Tailwind CSS.
+Client-ready ecommerce frontend built with React, Vite, React Router, Context API, and localStorage persistence.
 
-## Tech Stack
+## Features
 
-- React JS
-- JavaScript (ES6+)
-- Vite
-- Tailwind CSS
-- React Router DOM
-- Axios
-- Context API
+- Responsive home page with hero, category sections, and featured products
+- Product listing with search, category filters, sorting, product badges, and ratings
+- Product details page with quantity selector, stock count, wishlist, and cart actions
+- Persistent shopping cart with quantity update, remove item, totals, shipping, tax, and demo checkout
+- Wishlist page with saved products and cart actions
+- Login/register demo account flow
+- Customer account page with saved activity and order history
+- Admin dashboard with revenue, order, customer, conversion, and low-stock stats
+- Admin product management with add-product form and editable stock levels
+- Demo orders stored in localStorage, including new checkout orders
+- Production build verified with `npm run build`
 
-## Planned Features
+## Admin
 
-- Home Page
-- Product Listing
-- Product Details
-- Search Products
-- Category Filter
-- Shopping Cart
-- Wishlist
-- User Login & Register
-- Checkout
-- Responsive Design
+Open `/admin` to view the admin panel.
 
-## Status
+Use any login email to create a demo customer account. Use an email containing `admin` if you want the account label to represent an admin user.
 
-🚧 Day 1 - Project Setup Completed
+## Scripts
+
+```bash
+npm install
+npm run dev
+npm run lint
+npm run build
+npm run preview
+```
+
+## Production Notes
+
+This project is a polished frontend/demo package. For a live client store, connect these frontend flows to a backend API, database, payment gateway such as Stripe or Razorpay, real authentication, file upload/image hosting, and server-side order email notifications.

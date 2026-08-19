@@ -10,6 +10,8 @@ import {
   FiUser,
   FiMenu,
   FiX,
+  FiGrid,
+  FiLogOut,
 } from "react-icons/fi";
 
 function Navbar() {
@@ -44,9 +46,10 @@ function Navbar() {
         <NavLink onClick={() => setMenuOpen(false)} to="/products?category=Electronics">Electronics</NavLink>
         <NavLink onClick={() => setMenuOpen(false)} to="/products?category=Fashion">Fashion</NavLink>
         <NavLink onClick={() => setMenuOpen(false)} to="/products?sort=deal">Deals</NavLink>
+        <NavLink onClick={() => setMenuOpen(false)} to="/admin">Admin</NavLink>
         <NavLink onClick={() => setMenuOpen(false)} className="mobile-only-link" to="/wishlist">Wishlist</NavLink>
         <NavLink onClick={() => setMenuOpen(false)} className="mobile-only-link" to="/cart">Cart</NavLink>
-        <NavLink onClick={() => setMenuOpen(false)} className="mobile-only-link" to={user ? "/cart" : "/login"}>
+        <NavLink onClick={() => setMenuOpen(false)} className="mobile-only-link" to={user ? "/account" : "/login"}>
           {user ? "Account" : "Login"}
         </NavLink>
       </nav>
@@ -67,15 +70,23 @@ function Navbar() {
           {cartCount > 0 && <span>{cartCount}</span>}
         </Link>
 
-        <Link aria-label="Account" to={user ? "/cart" : "/login"} className="icon-link">
-          <FiUser />
+        <Link aria-label="Admin dashboard" to="/admin" className="icon-link">
+          <FiGrid />
         </Link>
 
-        {user ? (
-          <button className="login-btn" onClick={logout}>Logout</button>
-        ) : (
-          <Link to="/login" className="login-btn">Login</Link>
-        )}
+        <div className="account-menu">
+          <Link aria-label="Account" to={user ? "/account" : "/login"} className="account-trigger">
+            <FiUser />
+            <span>{user ? user.name : "Account"}</span>
+          </Link>
+          {user && (
+            <div className="account-dropdown">
+              <Link to="/account">My Account</Link>
+              <Link to="/admin">Admin Panel</Link>
+              <button onClick={logout}><FiLogOut /> Logout</button>
+            </div>
+          )}
+        </div>
       </div>
 
       <button className="mobile-btn" onClick={() => setMenuOpen(!menuOpen)}>

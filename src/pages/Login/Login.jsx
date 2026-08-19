@@ -8,8 +8,13 @@ function Login() {
   const submit = (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    login({ name: form.get("email").split("@")[0], email: form.get("email") });
-    navigate("/products");
+    const email = form.get("email");
+    login({
+      name: email.split("@")[0],
+      email,
+      role: email.toLowerCase().includes("admin") ? "admin" : "customer",
+    });
+    navigate("/account");
   };
 
   return (
@@ -17,6 +22,7 @@ function Login() {
       <form className="auth-card" onSubmit={submit}>
         <span>Welcome back</span>
         <h1>Login to ShopEase</h1>
+        <p>Use any email and password. Use an email containing admin for admin profile mode.</p>
         <input required type="email" name="email" placeholder="Email address" />
         <input required type="password" name="password" placeholder="Password" minLength="6" />
         <button className="primary-button" type="submit">Login</button>

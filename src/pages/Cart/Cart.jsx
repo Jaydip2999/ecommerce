@@ -3,11 +3,17 @@ import { Link } from "react-router-dom";
 import { useShop } from "../../context/useShop";
 
 function Cart() {
-  const { cart, removeFromCart, updateQuantity, subtotal, shipping, tax, total, clearCart } = useShop();
+  const { cart, removeFromCart, updateQuantity, subtotal, shipping, tax, total, createOrder, user } = useShop();
 
-  const placeOrder = () => {
-    alert("Demo order placed successfully. Connect Stripe/Razorpay and a backend API for live payments.");
-    clearCart();
+  const placeOrder = (event) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const order = createOrder({
+      name: form.get("name"),
+      email: form.get("email"),
+      address: form.get("address"),
+    });
+    alert(`Order ${order.id} placed successfully.`);
   };
 
   if (cart.length === 0) {
@@ -59,10 +65,10 @@ function Cart() {
           <div><span>Estimated tax</span><strong>${tax}</strong></div>
           <div className="total-line"><span>Total</span><strong>${total}</strong></div>
 
-          <form className="checkout-form" onSubmit={(event) => { event.preventDefault(); placeOrder(); }}>
-            <input required placeholder="Full name" />
-            <input required type="email" placeholder="Email address" />
-            <input required placeholder="Shipping address" />
+          <form className="checkout-form" onSubmit={placeOrder}>
+            <input required name="name" defaultValue={user?.name || ""} placeholder="Full name" />
+            <input required name="email" type="email" defaultValue={user?.email || ""} placeholder="Email address" />
+            <input required name="address" placeholder="Shipping address" />
             <button className="primary-button" type="submit">
               <CreditCard size={18} />
               Place Demo Order

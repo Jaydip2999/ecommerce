@@ -163,7 +163,6 @@ export function ShopProvider({ children }) {
     () => ({
       products,
       cart,
-      products,
       wishlist,
       user,
       orders,
@@ -185,6 +184,7 @@ export function ShopProvider({ children }) {
       logout,
     }),
     [
+      products,
       cart,
       wishlist,
       user,

@@ -8,8 +8,8 @@ function Register() {
   const submit = (event) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    login({ name: form.get("name"), email: form.get("email") });
-    navigate("/products");
+    login({ name: form.get("name"), email: form.get("email"), role: "customer" });
+    navigate("/account");
   };
 
   return (

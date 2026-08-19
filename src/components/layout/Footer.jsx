@@ -39,7 +39,7 @@ function Footer() {
           <a href="/products">Shop</a>
           <a href="/products?sort=deal">Deals</a>
           <a href="/wishlist">Wishlist</a>
-          <a href="/cart">Cart</a>
+          <a href="/admin">Admin Panel</a>
         </div>
 
         <div className="footer-col">

@@ -2,12 +2,11 @@ import { ArrowLeft, Heart, ShieldCheck, ShoppingCart, Star, Truck } from "lucide
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useShop } from "../../context/useShop";
-import { getProductById } from "../../data/products";
 
 function ProductDetails() {
   const { id } = useParams();
-  const product = getProductById(id);
-  const { addToCart, toggleWishlist, isWishlisted } = useShop();
+  const { products, addToCart, toggleWishlist, isWishlisted } = useShop();
+  const product = products.find((item) => item.id === Number(id));
   const [quantity, setQuantity] = useState(1);
 
   if (!product) {
