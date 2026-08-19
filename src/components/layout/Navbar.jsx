@@ -44,6 +44,11 @@ function Navbar() {
         <NavLink onClick={() => setMenuOpen(false)} to="/products?category=Electronics">Electronics</NavLink>
         <NavLink onClick={() => setMenuOpen(false)} to="/products?category=Fashion">Fashion</NavLink>
         <NavLink onClick={() => setMenuOpen(false)} to="/products?sort=deal">Deals</NavLink>
+        <NavLink onClick={() => setMenuOpen(false)} className="mobile-only-link" to="/wishlist">Wishlist</NavLink>
+        <NavLink onClick={() => setMenuOpen(false)} className="mobile-only-link" to="/cart">Cart</NavLink>
+        <NavLink onClick={() => setMenuOpen(false)} className="mobile-only-link" to={user ? "/cart" : "/login"}>
+          {user ? "Account" : "Login"}
+        </NavLink>
       </nav>
 
       <div className="right-icons">
