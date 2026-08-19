@@ -1,7 +1,7 @@
 import { ArrowLeft, Heart, ShieldCheck, ShoppingCart, Star, Truck } from "lucide-react";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useShop } from "../../context/ShopContext";
+import { useShop } from "../../context/useShop";
 import { getProductById } from "../../data/products";
 
 function ProductDetails() {

@@ -1,7 +1,6 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { products } from "../data/products";
-
-const ShopContext = createContext(null);
+import { ShopContext } from "./ShopContext";
 
 const loadState = (key, fallback) => {
   try {
@@ -31,7 +30,7 @@ export function ShopProvider({ children }) {
     localStorage.setItem("shopease-user", JSON.stringify(user));
   }, [user]);
 
-  const addToCart = (product, quantity = 1) => {
+  const addToCart = useCallback((product, quantity = 1) => {
     setCart((items) => {
       const current = items.find((item) => item.id === product.id);
       if (current) {
@@ -43,13 +42,13 @@ export function ShopProvider({ children }) {
       }
       return [...items, { ...product, quantity }];
     });
-  };
+  }, []);
 
-  const removeFromCart = (id) => {
+  const removeFromCart = useCallback((id) => {
     setCart((items) => items.filter((item) => item.id !== id));
-  };
+  }, []);
 
-  const updateQuantity = (id, quantity) => {
+  const updateQuantity = useCallback((id, quantity) => {
     setCart((items) =>
       items.map((item) =>
         item.id === id
@@ -57,20 +56,26 @@ export function ShopProvider({ children }) {
           : item,
       ),
     );
-  };
+  }, []);
 
-  const clearCart = () => setCart([]);
+  const clearCart = useCallback(() => setCart([]), []);
 
-  const toggleWishlist = (product) => {
+  const toggleWishlist = useCallback((product) => {
     setWishlist((items) => {
       const exists = items.some((item) => item.id === product.id);
       return exists
         ? items.filter((item) => item.id !== product.id)
         : [...items, product];
     });
-  };
+  }, []);
 
-  const isWishlisted = (id) => wishlist.some((item) => item.id === id);
+  const isWishlisted = useCallback(
+    (id) => wishlist.some((item) => item.id === id),
+    [wishlist],
+  );
+
+  const login = useCallback((account) => setUser(account), []);
+  const logout = useCallback(() => setUser(null), []);
 
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
   const subtotal = cart.reduce(
@@ -98,13 +103,28 @@ export function ShopProvider({ children }) {
       clearCart,
       toggleWishlist,
       isWishlisted,
-      login: setUser,
-      logout: () => setUser(null),
+      login,
+      logout,
     }),
-    [cart, wishlist, user, cartCount, subtotal, shipping, tax, total],
+    [
+      cart,
+      wishlist,
+      user,
+      cartCount,
+      subtotal,
+      shipping,
+      tax,
+      total,
+      addToCart,
+      removeFromCart,
+      updateQuantity,
+      clearCart,
+      toggleWishlist,
+      isWishlisted,
+      login,
+      logout,
+    ],
   );
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
 }
-
-export const useShop = () => useContext(ShopContext);

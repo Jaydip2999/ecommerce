@@ -1,7 +1,7 @@
 import "./FeaturedProducts.css";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useShop } from "../../context/ShopContext";
+import { useShop } from "../../context/useShop";
 
 const FeaturedProducts = () => {
   const { products, addToCart, toggleWishlist, isWishlisted } = useShop();

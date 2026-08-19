@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useShop } from "../../context/ShopContext";
+import { useShop } from "../../context/useShop";
 
 function Login() {
   const { login } = useShop();

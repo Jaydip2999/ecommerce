@@ -1,7 +1,7 @@
 import { Search, SlidersHorizontal, Star, Heart, ShoppingCart } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { useShop } from "../../context/ShopContext";
+import { useShop } from "../../context/useShop";
 import { categories } from "../../data/products";
 
 function Products() {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
-import { useShop } from "../../context/ShopContext";
+import { useShop } from "../../context/useShop";
 
 import {
   FiSearch,

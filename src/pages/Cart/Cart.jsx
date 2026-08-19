@@ -1,6 +1,6 @@
 import { CreditCard, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useShop } from "../../context/ShopContext";
+import { useShop } from "../../context/useShop";
 
 function Cart() {
   const { cart, removeFromCart, updateQuantity, subtotal, shipping, tax, total, clearCart } = useShop();
