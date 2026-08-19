@@ -36,6 +36,7 @@ body {
     align-items: center;
     gap: 12px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .logo-icon {
@@ -104,7 +105,8 @@ body {
     gap: 15px;
 }
 
-.right-icons button {
+.right-icons button,
+.icon-link {
     width: 42px;
     height: 42px;
     border: none;
@@ -116,19 +118,24 @@ body {
     justify-content: center;
     align-items: center;
     transition: .3s;
+    color: #111827;
+    text-decoration: none;
 }
 
-.right-icons button:hover {
+.right-icons button:hover,
+.icon-link:hover {
     background: #2563eb;
     color: white;
     transform: translateY(-3px);
 }
 
-.cart-btn {
+.cart-btn,
+.badge-link {
     position: relative;
 }
 
-.cart-btn span {
+.cart-btn span,
+.badge-link span {
     position: absolute;
     top: -4px;
     right: -3px;
@@ -145,10 +152,17 @@ body {
 
 .login-btn {
     width: 110px !important;
+    height: 42px;
     border-radius: 30px !important;
     background: #2563eb !important;
     color: white;
     font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    cursor: pointer;
 }
 
 .login-btn:hover {
@@ -159,6 +173,8 @@ body {
     display: none;
     font-size: 28px;
     cursor: pointer;
+    border: 0;
+    background: transparent;
 }
 
 /* ---------- Mobile ---------- */

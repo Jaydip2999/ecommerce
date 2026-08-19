@@ -1,53 +1,60 @@
 import "./FeaturedProducts.css";
-
-const products = [
-  {
-    id: 1,
-    name: "Classic Watch",
-    price: "$199",
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500",
-  },
-  {
-    id: 2,
-    name: "Running Shoes",
-    price: "$149",
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500",
-  },
-  {
-    id: 3,
-    name: "Headphones",
-    price: "$129",
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500",
-  },
-  {
-    id: 4,
-    name: "Backpack",
-    price: "$89",
-    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500",
-  },
-];
+import { Heart, ShoppingCart, Star } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useShop } from "../../context/ShopContext";
 
 const FeaturedProducts = () => {
+  const { products, addToCart, toggleWishlist, isWishlisted } = useShop();
+
   return (
     <section className="featured">
       <div className="container">
-        <h2>Featured Products</h2>
-        <p>Discover our most popular products.</p>
+        <div className="section-title">
+          <span>Featured Picks</span>
+          <h2>Best Products For Your Storefront</h2>
+          <p>Discover our most popular products.</p>
+        </div>
 
         <div className="product-grid">
-          {products.map((item) => (
+          {products.slice(0, 4).map((item) => (
             <div className="product-card" key={item.id}>
-              <img src={item.image} alt={item.name} />
+              <Link to={`/products/${item.id}`} className="product-image">
+                <span className="product-badge">{item.badge}</span>
+                <img src={item.image} alt={item.name} />
+              </Link>
 
               <div className="product-info">
-                <h3>{item.name}</h3>
-                <span>{item.price}</span>
+                <div className="product-meta">
+                  <span>{item.category}</span>
+                  <span><Star size={15} fill="currentColor" /> {item.rating}</span>
+                </div>
+                <Link to={`/products/${item.id}`}>
+                  <h3>{item.name}</h3>
+                </Link>
+                <div className="price-row">
+                  <strong>${item.price}</strong>
+                  <del>${item.oldPrice}</del>
+                </div>
 
-                <button>Add to Cart</button>
+                <div className="product-actions">
+                  <button onClick={() => addToCart(item)}>
+                    <ShoppingCart size={18} />
+                    Add
+                  </button>
+                  <button
+                    className={isWishlisted(item.id) ? "wish active" : "wish"}
+                    onClick={() => toggleWishlist(item)}
+                    aria-label="Toggle wishlist"
+                  >
+                    <Heart size={18} />
+                  </button>
+                </div>
               </div>
             </div>
           ))}
         </div>
+
+        <Link to="/products" className="view-all">View All Products</Link>
       </div>
     </section>
   );

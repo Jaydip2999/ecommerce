@@ -1,4 +1,5 @@
 import "./Categories.css";
+import { Link } from "react-router-dom";
 
 import electronics from "../../assets/categories/electronics.png";
 import fashion from "../../assets/categories/fashion.png";
@@ -55,17 +56,21 @@ function Categories() {
 
         <div className="category-grid">
           {categories.map((item) => (
-            <div className="category-card" key={item.id}>
+            <Link
+              className="category-card"
+              key={item.id}
+              to={`/products?category=${item.title === "Watches" ? "Watches" : item.title}`}
+            >
               <div className="category-image">
                 <img src={item.image} alt={item.title} />
               </div>
 
               <h3>{item.title}</h3>
 
-              <button>
+              <span className="category-action">
                 Explore
-              </button>
-            </div>
+              </span>
+            </Link>
           ))}
         </div>
 

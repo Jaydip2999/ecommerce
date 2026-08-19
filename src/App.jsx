@@ -1,17 +1,30 @@
+import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import "./App.css";
 import Footer from "./components/layout/Footer";
-import Hero from "./components/Home/Hero";
-import Categories from "./components/Home/Categories";
-import FeaturedProducts from "./components/Home/FeaturedProducts";
+import Home from "./pages/Home/Home";
+import Products from "./pages/Products/Products";
+import ProductDetails from "./pages/Productdetails/Productdetails";
+import Cart from "./pages/Cart/Cart";
+import Wishlist from "./pages/Wishlist/Wishlist";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 function App() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Categories />
-      <FeaturedProducts />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </main>
       <Footer />
     </>
   );

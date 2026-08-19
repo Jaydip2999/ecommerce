@@ -1,5 +1,6 @@
 import "./Hero.css";
-import heroImage from "../../assets/hero.png";
+import heroImage from "../../assets/Hero.png";
+import { Link } from "react-router-dom";
 
 import { Sparkles, ArrowRight, ShoppingBag } from "lucide-react";
 
@@ -25,15 +26,15 @@ function Hero() {
           </p>
 
           <div className="hero-buttons">
-            <button className="shop-btn">
+            <Link className="shop-btn" to="/products">
               <ShoppingBag size={20} />
               Shop Now
-            </button>
+            </Link>
 
-            <button className="explore-btn">
+            <Link className="explore-btn" to="/products?sort=deal">
               Explore
               <ArrowRight size={18} />
-            </button>
+            </Link>
           </div>
 
           <div className="hero-info">

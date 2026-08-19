@@ -47,6 +47,8 @@
     transition:.4s;
     box-shadow:0 10px 25px rgba(0,0,0,.06);
     padding-bottom:25px;
+    color: inherit;
+    text-decoration: none;
 }
 
 .category-card:hover{
@@ -76,7 +78,8 @@
     color:#111827;
 }
 
-.category-card button{
+.category-action{
+    display:inline-flex;
     padding:12px 28px;
     border:none;
     border-radius:50px;
@@ -87,7 +90,7 @@
     transition:.3s;
 }
 
-.category-card button:hover{
+.category-card:hover .category-action{
     background:#ff6b00;
 }
 

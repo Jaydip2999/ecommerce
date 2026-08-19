@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
+import { useShop } from "../../context/ShopContext";
 
 import {
   FiSearch,
@@ -13,6 +15,7 @@ import {
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scroll, setScroll] = useState(false);
+  const { cartCount, wishlist, user, logout } = useShop();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,48 +29,53 @@ function Navbar() {
 
   return (
     <header className={scroll ? "navbar active" : "navbar"}>
-      <div className="logo">
+      <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
         <div className="logo-icon">S</div>
 
         <div>
           <h2>ShopEase</h2>
           <span>Premium Store</span>
         </div>
-      </div>
+      </Link>
 
       <nav className={menuOpen ? "nav-menu open" : "nav-menu"}>
-        <a href="#">Home</a>
-        <a href="#">Shop</a>
-        <a href="#">Categories</a>
-        <a href="#">Deals</a>
-        <a href="#">About</a>
+        <NavLink onClick={() => setMenuOpen(false)} to="/">Home</NavLink>
+        <NavLink onClick={() => setMenuOpen(false)} to="/products">Shop</NavLink>
+        <NavLink onClick={() => setMenuOpen(false)} to="/products?category=Electronics">Electronics</NavLink>
+        <NavLink onClick={() => setMenuOpen(false)} to="/products?category=Fashion">Fashion</NavLink>
+        <NavLink onClick={() => setMenuOpen(false)} to="/products?sort=deal">Deals</NavLink>
       </nav>
 
       <div className="right-icons">
-        <button>
+        <Link aria-label="Search products" to="/products" className="icon-link">
           <FiSearch />
-        </button>
+        </Link>
 
-        <button>
+        <Link aria-label="Wishlist" to="/wishlist" className="icon-link badge-link">
           <FiHeart />
-        </button>
+          {wishlist.length > 0 && <span>{wishlist.length}</span>}
+        </Link>
 
-        <button className="cart-btn">
+        <Link aria-label="Cart" to="/cart" className="icon-link cart-btn">
           <FiShoppingCart />
 
-          <span>2</span>
-        </button>
+          {cartCount > 0 && <span>{cartCount}</span>}
+        </Link>
 
-        <button>
+        <Link aria-label="Account" to={user ? "/cart" : "/login"} className="icon-link">
           <FiUser />
-        </button>
+        </Link>
 
-        <button className="login-btn">Login</button>
+        {user ? (
+          <button className="login-btn" onClick={logout}>Logout</button>
+        ) : (
+          <Link to="/login" className="login-btn">Login</Link>
+        )}
       </div>
 
-      <div className="mobile-btn" onClick={() => setMenuOpen(!menuOpen)}>
+      <button className="mobile-btn" onClick={() => setMenuOpen(!menuOpen)}>
         {menuOpen ? <FiX /> : <FiMenu />}
-      </div>
+      </button>
     </header>
   );
 }
