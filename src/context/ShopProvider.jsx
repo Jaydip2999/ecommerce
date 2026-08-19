@@ -12,6 +12,30 @@ const loadState = (key, fallback) => {
   }
 };
 
+const defaultUsers = [
+  {
+    id: 1,
+    name: "Store Admin",
+    email: "admin@shopease.com",
+    password: "Admin@123",
+    role: "admin",
+  },
+  {
+    id: 2,
+    name: "Demo Customer",
+    email: "customer@shopease.com",
+    password: "Customer@123",
+    role: "customer",
+  },
+];
+
+const publicUser = (account) => ({
+  id: account.id,
+  name: account.name,
+  email: account.email,
+  role: account.role,
+});
+
 export function ShopProvider({ children }) {
   const [products, setProducts] = useState(() =>
     loadState("shopease-products", initialProducts),
@@ -21,6 +45,9 @@ export function ShopProvider({ children }) {
     loadState("shopease-wishlist", []),
   );
   const [user, setUser] = useState(() => loadState("shopease-user", null));
+  const [users, setUsers] = useState(() =>
+    loadState("shopease-users", defaultUsers),
+  );
   const [orders, setOrders] = useState(() =>
     loadState("shopease-orders", sampleOrders),
   );
@@ -40,6 +67,10 @@ export function ShopProvider({ children }) {
   useEffect(() => {
     localStorage.setItem("shopease-user", JSON.stringify(user));
   }, [user]);
+
+  useEffect(() => {
+    localStorage.setItem("shopease-users", JSON.stringify(users));
+  }, [users]);
 
   useEffect(() => {
     localStorage.setItem("shopease-orders", JSON.stringify(orders));
@@ -147,7 +178,63 @@ export function ShopProvider({ children }) {
     [wishlist],
   );
 
-  const login = useCallback((account) => setUser(account), []);
+  const login = useCallback(
+    ({ email, password }) => {
+      const account = users.find(
+        (item) => item.email.toLowerCase() === email.trim().toLowerCase(),
+      );
+
+      if (!account || account.password !== password) {
+        return {
+          ok: false,
+          message: "Invalid email or password.",
+        };
+      }
+
+      const nextUser = publicUser(account);
+      setUser(nextUser);
+
+      return {
+        ok: true,
+        user: nextUser,
+      };
+    },
+    [users],
+  );
+
+  const register = useCallback(
+    ({ name, email, password }) => {
+      const normalizedEmail = email.trim().toLowerCase();
+      const exists = users.some(
+        (account) => account.email.toLowerCase() === normalizedEmail,
+      );
+
+      if (exists) {
+        return {
+          ok: false,
+          message: "This email is already registered.",
+        };
+      }
+
+      const account = {
+        id: Date.now(),
+        name,
+        email: normalizedEmail,
+        password,
+        role: "customer",
+      };
+
+      setUsers((items) => [...items, account]);
+      setUser(publicUser(account));
+
+      return {
+        ok: true,
+        user: publicUser(account),
+      };
+    },
+    [users],
+  );
+
   const logout = useCallback(() => setUser(null), []);
 
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
@@ -165,6 +252,7 @@ export function ShopProvider({ children }) {
       cart,
       wishlist,
       user,
+      users,
       orders,
       cartCount,
       subtotal,
@@ -181,6 +269,7 @@ export function ShopProvider({ children }) {
       addProduct,
       updateProductStock,
       login,
+      register,
       logout,
     }),
     [
@@ -188,6 +277,7 @@ export function ShopProvider({ children }) {
       cart,
       wishlist,
       user,
+      users,
       orders,
       cartCount,
       subtotal,
@@ -204,6 +294,7 @@ export function ShopProvider({ children }) {
       addProduct,
       updateProductStock,
       login,
+      register,
       logout,
     ],
   );

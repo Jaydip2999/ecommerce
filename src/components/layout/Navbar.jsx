@@ -46,7 +46,9 @@ function Navbar() {
         <NavLink onClick={() => setMenuOpen(false)} to="/products?category=Electronics">Electronics</NavLink>
         <NavLink onClick={() => setMenuOpen(false)} to="/products?category=Fashion">Fashion</NavLink>
         <NavLink onClick={() => setMenuOpen(false)} to="/products?sort=deal">Deals</NavLink>
-        <NavLink onClick={() => setMenuOpen(false)} to="/admin">Admin</NavLink>
+        {user?.role === "admin" && (
+          <NavLink onClick={() => setMenuOpen(false)} to="/admin">Admin</NavLink>
+        )}
         <NavLink onClick={() => setMenuOpen(false)} className="mobile-only-link" to="/wishlist">Wishlist</NavLink>
         <NavLink onClick={() => setMenuOpen(false)} className="mobile-only-link" to="/cart">Cart</NavLink>
         <NavLink onClick={() => setMenuOpen(false)} className="mobile-only-link" to={user ? "/account" : "/login"}>
@@ -70,9 +72,11 @@ function Navbar() {
           {cartCount > 0 && <span>{cartCount}</span>}
         </Link>
 
-        <Link aria-label="Admin dashboard" to="/admin" className="icon-link">
-          <FiGrid />
-        </Link>
+        {user?.role === "admin" && (
+          <Link aria-label="Admin dashboard" to="/admin" className="icon-link">
+            <FiGrid />
+          </Link>
+        )}
 
         <div className="account-menu">
           <Link aria-label="Account" to={user ? "/account" : "/login"} className="account-trigger">
@@ -82,7 +86,7 @@ function Navbar() {
           {user && (
             <div className="account-dropdown">
               <Link to="/account">My Account</Link>
-              <Link to="/admin">Admin Panel</Link>
+              {user.role === "admin" && <Link to="/admin">Admin Panel</Link>}
               <button onClick={logout}><FiLogOut /> Logout</button>
             </div>
           )}

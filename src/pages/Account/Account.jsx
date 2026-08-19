@@ -29,7 +29,9 @@ function Account() {
           <p>Manage your orders, saved products, shopping activity, and store access.</p>
         </div>
         <div className="account-actions">
-          <Link className="secondary-button" to="/admin"><LayoutDashboard size={18} /> Admin Panel</Link>
+          {user.role === "admin" && (
+            <Link className="secondary-button" to="/admin"><LayoutDashboard size={18} /> Admin Panel</Link>
+          )}
           <button className="secondary-button" onClick={logout}><LogOut size={18} /> Logout</button>
         </div>
       </div>

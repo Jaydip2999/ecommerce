@@ -11,6 +11,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Account from "./pages/Account/Account";
 import Admin from "./pages/Admin/Admin";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 function App() {
   return (
@@ -26,7 +27,14 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/account" element={<Account />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute role="admin">
+                <Admin />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </main>
       <Footer />
